@@ -1,0 +1,96 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+char str[80];
+char telNumber[10000][9];
+char map[]="22233344455566677778889999";
+int n;
+void input();//录入数据 
+void changeNumber(char str[]);//转换格式 
+void sortNumber();//排序 并查重 调用outNumber输出 
+void outNumber(int i);//输出号码 
+
+int compare(const void *elem1,const void *elem2){
+	return (strcmp((char *)elem1,(char *)elem2));
+}
+
+int main(void)
+{
+	input();
+	sortNumber();
+
+	return 0;
+}
+void input()
+{
+	scanf("%d",&n);
+	for(int i=0;i<n;i++){
+		scanf("%s",str);
+		changeNumber(str);
+	}
+	
+}
+
+void changeNumber(char str[]){
+	static int j;
+	int k=0;
+	for(int i=0;i<strlen(str);i++){
+		if(str[i]=='-')	continue;
+		else if(str[i]>='A'&&str[i]<='Z'){
+			telNumber[j][k++]=map[str[i]-'A'];
+			continue;
+		}
+		else telNumber[j][k++]=str[i];
+	}
+	j++;
+}
+void sortNumber()
+{
+	int i,j;
+	qsort(telNumber,n,9,compare);		
+	int noduplicate;
+	i=0;
+	noduplicate=1;
+	while(i<n){
+		j=i;
+		i++;
+		while((strcmp(telNumber[j],telNumber[i]))==0&&i<n)	i++;
+		if(i-j>1){
+			outNumber(j);
+			noduplicate=0;
+			printf(" %d\n",i-j);
+		}
+	}
+	if(noduplicate)	printf("No duplicates.\n");
+}
+
+void outNumber(int i)
+{
+		for(int t=0;t<strlen(telNumber[i]);t++){
+			if(t==2){
+				printf("%c-",telNumber[i][t]);
+				continue;
+			}
+			printf("%c",telNumber[i][t]);
+		}
+}
+/*
+input:
+12
+4873279
+ITS-EASY
+888-4567
+3-10-10-10
+888-GLOP
+TUT-GLOP
+967-11-11
+310-GINO
+F101010
+888-1200
+-4-8-7-3-2-7-9-
+487-3279
+output:
+310-1010 2
+487-3279 4
+888-4567 3
+*/
