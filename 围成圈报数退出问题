@@ -1,0 +1,30 @@
+//n个人围成一个圈，报数，m出 
+#include<stdio.h>
+int main(void)
+{
+	int i,n,m,*p,a[80],flag,count;
+	printf("please input n,m:");
+	scanf("%d%d",&n,&m);
+	for(i=0;i<n;i++)
+		a[i]=i+1;//编号 
+	p=a;
+	flag=count=0;
+	while(flag<n-1){
+		if(*p!=0)	count++;//报数 
+		if(count==m){
+			flag++;//保证除了最后一个都遍历到 
+			printf("No.%d\n",*p);
+			*p=0;//将输出过的单元置为0 
+			count=0;//重新报数 
+		}
+		p++;//保证继续报数 
+		if(p==a+n)//保证循环报数 
+			p=a;
+	}
+	p=a;
+	while(*p==0)//找出最后一个没有被置为0的元素 
+		p++;
+	printf("the last is %d",*p);
+	
+	return 0;
+}
