@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<math.h>
+struct bacteria{
+	int startMonth;
+	int startDay;
+	int startNum;
+	int endMonth;
+	int endDay;
+	int sumDay;
+	long long endNum;
+};
+int main(void)
+{
+	int n;
+	int months[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+	scanf("%d",&n);
+	struct bacteria bt;
+	for(int i=0;i<n;i++){
+		bt.sumDay=1;
+		bt.endNum=0;
+		scanf("%d %d %d %d %d",&bt.startMonth,&bt.startDay,&bt.startNum,&bt.endMonth,&bt.endDay);
+		for(int j=bt.startMonth;j<bt.endMonth;j++){
+			bt.sumDay+=months[j];
+		}
+		bt.sumDay=bt.sumDay+bt.endDay-bt.startDay;
+		bt.endNum=bt.startNum*pow(2,(bt.sumDay-1));
+		printf("%lld\n",bt.endNum);
+	}
+}
