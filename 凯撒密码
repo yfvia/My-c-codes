@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<string.h>
+void getResult(char *p);
+int main(void)
+{
+	char temp[20];
+	char str[210];
+	char str1[20]={"START"};
+	char str2[20]={"END"};
+	char str3[20]={"ENDOFINPUT"};
+	while(1){
+		gets(temp);
+		if(strcmp(temp,str1)==0)	{
+			gets(str);
+			getResult(str);
+		}
+		if(strcmp(temp,str2)==0)	continue;
+		if(strcmp(temp,str3)==0)	return 0; 
+	}
+	
+	return 0;
+}
+void getResult(char *p)
+{
+	 for(int i=0;i<strlen(p);i++){
+	 	if(p[i]>='F'&&p[i]<='Z'){
+	 		p[i]-=5;
+	 		continue;
+	 	}	
+	 	if(p[i]>='A'&&p[i]<='E'){
+	 		p[i]='Z'-4+p[i]-'A';
+	 	}
+	 }
+	 puts(p);
+}
