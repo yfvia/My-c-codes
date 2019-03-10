@@ -1,0 +1,36 @@
+#include<stdio.h>
+int main(void)
+{
+	int cc1,cc2,cc3,cc4,cc5,cc6,sum;
+	cc1=cc2=cc3=cc4=cc5=cc6=0;
+	int A,B,C,D,E,F;
+	char info[2][9]={"不是罪犯","是罪犯"};
+	for(A=0;A<=1;A++)
+		for(B=0;B<=1;B++)
+			for(C=0;C<=1;C++)
+				for(D=0;D<=1;D++)
+					for(E=0;E<=1;E++)
+						for(F=0;F<=1;F++)
+						{
+							cc1=(A||B);
+							cc2=(!(A&&D));
+							cc3=(A&&E)||(A&&F)||(E&&F);
+							cc4=(B&&C)||(!B&&!C);
+							cc5=(C&&!D)||(D&&!C);
+							cc6=(D||(!E));
+
+		sum=cc1+cc2+cc3+cc4+cc5+cc6;
+	if(sum==6)
+	{
+		
+		printf("A:%s\n",info[A]);
+		printf("B:%s\n",info[B]);
+		printf("C:%s\n",info[C]);
+		printf("D:%s\n",info[D]);
+		printf("E:%s\n",info[E]);
+		printf("F:%s\n",info[F]);
+	}
+}
+getchar() ;
+	return 0;
+} 
