@@ -1,0 +1,50 @@
+//错误算法 
+#include<stdio.h>
+int check(int n);
+int main(void)
+{
+	int year,month,day;
+	int temp;//标志 
+	long long sumDays=-1;
+	int year1=365;//平年 
+	int year2=366;//闰年 
+	int month1[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};//平年 
+	int month2[13]={0,31,29,31,30,31,30,31,31,30,31,30,31};//闰年 
+	int week[8]={0,1,2,3,4,5,6,7};//周 
+	int weekDay;//out_day 
+	scanf("%d %d %d",&year,&month,&day);
+	//年
+	temp=check(1980);
+	for(int i=1980;i<year;i++){
+		temp=check(i);
+		if(temp==1){
+			sumDays+=year1;
+		}
+		else sumDays+=year2;
+	}
+	for(int i=1;i<month;i++){
+		if(temp==1){
+			sumDays+=month1[i];
+		}
+		else sumDays+=month2[i];
+	}
+	sumDays+=day;
+	
+	weekDay=week[2+(sumDays%7)];
+	printf("%d",weekDay);
+
+	return 0;
+}
+int check(int n)
+{
+	if(n%4==0){
+			if(n%100==0){
+				if(n%400==0){
+					return 2;
+				}
+				else return 1;
+			}
+			else return 2;
+		}
+		else return 1;	
+}
