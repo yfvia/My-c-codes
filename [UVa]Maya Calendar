@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string.h>
+int getDays(int hyear,char hMonth[],int hDay);
+void change(int allDays);
+char haabMonth[19][10]={"pop","no","zip","zotz","tzec","xul","yoxkin","mol","chen","yax","zac","ceh","mac","kankin","muan","pax","koyab","cumhu","uayet"};
+char tzolkinDay[20][10]={"imix","ik","akbal","kan","chicchan","cimi","manik","lamat","muluk","ok","chuen","eb","ben","ix","mem","cib","caban","eznab","canac","ahau"};
+int main(void)
+{
+	int n;//次数
+	int allDays=0;//储存总天数
+	int hYear,hDay;
+	char hMonth[10];
+	int i=0;
+	
+	scanf("%d",&n);
+	printf("%d\n",n);
+	for(i=0;i<n;i++){
+		scanf("%d. %s %d",&hDay,hMonth,&hYear);
+		allDays=getDays(hDay,hMonth,hYear);
+		change(allDays);
+	}
+	
+	return 0;
+}
+int getDays(int hDay,char hMonth[],int hYear)
+{
+	int sumDays=0;
+	int i=0;
+	for(i=0;i<19;i++){
+		if(strcmp(haabMonth[i],hMonth)==0)	break;
+	}
+	sumDays=hYear*365+i*20+hDay;
+	return sumDays;
+}
+void change(int allDays)
+{
+	char *tkMonth;//储存装换后的Day‘s name 
+	int tkYear,tkDay;
+	int leftDay=0;
+	tkYear=allDays/260;
+	leftDay=allDays%260;
+	tkMonth=tzolkinDay[leftDay%20];
+	tkDay=leftDay%13;
+	printf("%d %s %d\n",tkDay+1,tkMonth,tkYear);
+}
