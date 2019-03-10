@@ -1,0 +1,86 @@
+#include<stdio.h>
+void getResult(int n);
+void max(int n);
+struct student{
+		char name[22];
+		int finalGrade;
+		int classGrade;
+		char stuCadre;
+		char west;
+		int paperNumber;
+		int scholarship;
+	}stu[110];
+int main(void)
+{
+	int N;
+	int allScholarship=0; 
+	//数据录入 
+	scanf("%d",&N);
+	for(int i=0;i<N;i++){
+		scanf("%s %d %d %c %c %d",stu[i].name,&stu[i].finalGrade,&stu[i].classGrade,&stu[i].stuCadre,&stu[i].west,&stu[i].paperNumber);
+	}
+	//得出每个人的奖学金金额 并进行累加 
+	for(int i=0;i<N;i++){
+		getResult(i);
+		allScholarship+=stu[i].scholarship;
+	}
+	//特殊情况 
+	if(N==1){
+		printf("%s\n%d\n%d\n",stu[0].name,stu[0].scholarship,allScholarship);
+		return 0;
+	}
+	//找出最大值并输出结果 
+	max(N);
+	//输出奖学金总金额 
+	printf("%d",allScholarship);
+	
+	return 0;
+}
+void getResult(int n)
+{
+	if(stu[n].finalGrade>80&&stu[n].paperNumber>=1)	stu[n].scholarship+=8000;
+	if(stu[n].finalGrade>85&&stu[n].classGrade>80)	stu[n].scholarship+=4000;
+	if(stu[n].finalGrade>90)	stu[n].scholarship+=2000;
+	if(stu[n].finalGrade>85&&stu[n].west=='Y')	stu[n].scholarship+=1000;
+	if(stu[n].classGrade>80&&stu[n].stuCadre=='Y')	stu[n].scholarship+=850;
+}
+void max(int n) 
+{
+	int index=0;
+	for(int i=1;i<n;i++){
+		if(stu[i].scholarship>stu[index].scholarship)	index=i;
+	}
+	printf("%s\n%d\n",stu[index].name,stu[index].scholarship);
+}
+
+/*
+    1)  院士奖学金，每人8000元，期末平均成绩高于80分（>80），并且在本学期内发表1篇或1篇以上论文的学生均可获得；
+    2)  五四奖学金，每人4000元，期末平均成绩高于85分（>85），并且班级评议成绩高于80分（>80）的学生均可获得；
+    3)  成绩优秀奖，每人2000元，期末平均成绩高于90分（>90）的学生均可获得；
+    4)  西部奖学金，每人1000元，期末平均成绩高于85分（>85）的西部省份学生均可获得；
+    5)  班级贡献奖，每人850元，班级评议成绩高于80分（>80）的学生干部均可获得；
+    tip1:
+    输入的第一行是一个整数N（1 <= N <= 100），表示学生的总数。
+    接下来的N行每行是一位学生的数据，
+
+从左向右依次是姓名，期末平均成绩，班级评议成绩，是否是学生干部，是否是西部省份学生，以及发表的论文数。
+   
+ 姓名是由大小写英文字母组成的长度不超过20的字符串（不含空格）；
+    期末平均成绩和班级评议成绩都是0到100之间的整数（包括0和100）；
+    是否是学生干部和是否是西部省份学生分别用一个字符表示，Y表示是，N表示不是；
+    发表的论文数是0到10的整数（包括0和10）。每两个相邻数据项之间用一个空格分隔。
+    tip2:
+    输出包括三行，
+
+第一行是获得最多奖金的学生的姓名，
+
+第二行是这名学生获得的奖金总数。如果有两位或两位以上的学生获得的奖金最多，输出他们之中在输入文件中出现最早的学生的姓名。
+
+第三行是这N个学生获得的奖学金的总数。
+	tip3:
+4
+YaoLin 87 82 Y N 0
+ChenRuiyi 88 78 N Y 1
+LiXin 92 88 N N 0
+ZhangQin 83 87 Y N 1
+*/
