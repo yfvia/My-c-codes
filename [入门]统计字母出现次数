@@ -1,0 +1,29 @@
+#include<stdio.h>
+/*
+这个算法利用 桶排序  浪费空间 速度较快 本题利用字母之间的差 进行储存 最后再输出 
+*/
+int main(void)
+{
+	int num[30];
+	char in;
+	//初始化 
+	for(int i=0;i<30;i++)
+		num[i]=0;
+	//录入数据 
+	while(1){
+		scanf("%c",&in);
+		if(in=='.')	break;
+		else num[in-'a']++;
+	}
+	//输出已输入的字母 
+	for(int i=0;i<30;i++){
+		if(num[i]!=0)	printf("%c",'a'+i);//i：index 
+	}
+	printf("\n");
+	//输出对应的次数 
+	for(int i=0;i<30;i++){
+		if(num[i]!=0)	printf("%d",num[i]);
+	}
+	
+	return 0;
+}
