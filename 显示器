@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<string.h>
+char n1[11]={"- -- -----"};
+char n2[11]={"|   ||| ||"};
+char n3[11]={"|||||  |||"};
+char n4[11]={"  ----- --"};
+char n5[11]={"| |   | | "};
+char n6[11]={"|| |||||||"};
+char n7[11]={"- -- -- --"};
+int main(void)
+{
+	int s;
+	char numbers[20];
+	int length=0; 
+	
+	while(1){
+		scanf("%d%s",&s,numbers);//input
+		if(s==0)	break;
+		length=strlen(numbers); 
+		for(int i=0;i<length;i++){//输出第一画 
+			printf(" ");//s+2中的1 
+			for(int j=0;j<s;j++){
+				printf("%c",n1[numbers[i]-'0']);//s+2中的s 
+			}
+			printf("  ");//s+2中的2 
+		}
+		printf("\n");
+		for(int t=0;t<s;t++){//控制s行 
+			for(int i=0;i<length;i++){
+				printf("%c",n2[numbers[i]-'0']);//第二画 
+				for(int j=0;j<s;j++)
+					printf(" ");//输出2、3之间的空额 
+				printf("%c ",n3[numbers[i]-'0']);//输出第三画及其后空列 
+			}
+			printf("\n");//输完一个行后换行 
+		}
+		
+		for(int i=0;i<length;i++){
+			printf(" ");
+			for(int j=0;j<s;j++)
+				printf("%c",n4[numbers[i]-'0']);
+			printf("  ");
+		}
+		printf("\n");
+		for(int t=0;t<s;t++){
+			for(int i=0;i<length;i++){
+				printf("%c",n5[numbers[i]-'0']);
+				for(int j=0;j<s;j++)
+					printf(" ");
+				printf("%c ",n6[numbers[i]-'0']);
+			}
+			printf("\n");
+		}
+		for(int i=0;i<length;i++){
+			printf(" ");
+			for(int j=0;j<s;j++)
+				printf("%c",n7[numbers[i]-'0']);
+			printf("  ");
+		}
+		printf("\n\n");
+		
+	}
+	
+	return 0;
+}
