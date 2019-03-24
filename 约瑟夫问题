@@ -1,0 +1,70 @@
+#include<stdio.h>
+int main(void)
+{
+	int monkey[310];
+	int n,m;
+	while(1){
+		scanf("%d%d",&n,&m);
+		if(n==0)	break;
+		
+		for(int i=0;i<n;i++)//初始化，并进行标记 
+			monkey[i]=i+1;
+		int index=0;//下标 
+		for(int i=0;i<n;i++){
+			int count=0;//用于给m前的个数计数 
+			while(count<m){
+				while(monkey[index]==0)
+					index=(index+1)%n;//技巧性处理，当index=n-1时，index=0 
+				count++;
+				index=(index+1)%n;//同上 
+			}
+			index--;//减去多加的那个数 
+			if(index<0){//当index=0时，会被减至-1 
+				index=n-1;//置为n-1 
+			}
+			if(i==n-1){//当被置为0的数为最后一个时 ，output 
+				printf("%d\n",monkey[index]);
+			}
+			monkey[index]=0;
+		}
+		
+	}
+	
+	return 0;
+}
+
+/*
+队列，但提示时间超时 
+#include<stdio.h>
+int main(void)
+{
+	int head=0,tail=0;
+	int data[10000];
+	int n,m;
+	int count=0;
+	while(1){
+	scanf("%d%d",&n,&m);
+	if(n==0)	return 0;
+	count=0;
+	head=1;
+	tail=n+1;
+	for(int i=head;i<tail;i++)
+		data[i]=i;
+	do{
+		int count2=0;
+		while(count2<m-1){
+			data[tail]=data[head];
+			head++;
+			tail++;
+			count2++;
+		}
+		head++;
+		count2=0;
+		count++;
+		if(count==n-1)	break;
+	}while(1);
+	printf("%d\n",data[head]);
+}
+	return 0;
+}
+*/
