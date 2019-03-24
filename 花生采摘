@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main(void)
+{
+	int map[30][30];
+	int M,N;
+	int K;//time
+	int maxi=1,maxj=1;
+	int mi=0,mj=0;
+	int max=0;
+	int time=0,needTime=0,backTime=0;
+	int i,j;
+	int numbers=0;
+	scanf("%d%d%d",&M,&N,&K);
+	//录入田地数据 ,并得到最大列数以及最大花生数 
+	
+	for(i=1;i<=M;i++)
+		for(j=1;j<=N;j++){
+			scanf("%d",&map[i][j]);
+			if(map[i][j]>max){
+				max=map[i][j];
+				maxj=j;
+				maxi=i;
+			}
+		}
+	time=K;
+	mj=maxj;
+	//得到下一步所需时间 
+	while(1){
+	for(i=1;i<=M;i++)
+		for(j=1;j<=N;j++){
+			if(map[i][j]>max){
+				max=map[i][j];
+				maxj=j;
+				maxi=i;
+				if(max==0)	return 0;
+			}
+		}
+	
+	needTime=abs(maxj-mj)+abs(maxi-mi)+1+maxi;
+	if(needTime>time)	{
+		mi=0;
+		printf("%d\n",numbers);
+		return 0;
+	}
+	else {
+		int t=maxi;
+		mi=maxi;
+		mj=maxj;
+		numbers+=max;
+		map[mi][mj]=0;
+		max=0;
+		time=time-needTime+t;
+	}
+}
+	
+	return 0;
+}
