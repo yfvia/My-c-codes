@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+int main(void)
+{
+	int aNum[10010],bNum[10010],result[20050];
+	char ch[10010];
+	//getFirstNumber
+	scanf("%s",ch);
+	char temp=ch[0];
+	//转化为int数组 
+	int number1=strlen(ch);
+	int index=0;
+	for(int i=number1-1;i>=0;i--,index++){
+		aNum[index]=ch[i]-'0';
+	}
+	//getSecondNumber
+	scanf("%s",ch);
+	if(temp=='0'||ch[0]=='0'){
+		printf("0\n");
+		return 0;
+	}
+	//转化为int数组 
+	int number2=strlen(ch);
+	index=0;
+	for(int i=number2-1;i>=0;i--,index++){
+		bNum[index]=ch[i]-'0';
+	}
+	//相乘 
+	for(int i=0;i<number1;i++){
+		for(int j=0;j<number2;j++){
+			result[j+i]+=(aNum[i]*bNum[j]);
+		}
+	}
+	//进位 
+	for(int i=0;i<number1+number2;i++){
+		if(result[i]>=10)	{
+			result[i+1]+=(result[i]/10);
+			result[i]%=10;
+		}
+	}
+	//output
+	int flag=0;
+	for(int i=number1+number2-1;i>=0;i--){
+		if(flag==1||result[i]!=0){
+			printf("%d",result[i]);
+			flag=1;
+		}
+	}
+	printf("\n");
+	
+	return 0;
+} 
